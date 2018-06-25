@@ -16,6 +16,7 @@ const speaker = new Speaker({
 const decoder = new lame.Decoder();
 
 request
-  .get('http://st01.dlf.de/dlf/01/128/mp3/stream.mp3')
+  .get('http://burnfm.radionetz.de:8000/burn-fm.mp3')
+//  .get('http://st01.dlf.de/dlf/01/128/mp3/stream.mp3')
   .pipe(decoder)
   .pipe(speaker);

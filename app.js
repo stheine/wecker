@@ -2,46 +2,74 @@
 
 'use strict';
 
-// const five       = require('johnny-five');
+/* eslint-disable no-console */
+
+// const delay      = require('delay');
+// const font       = require('oled-font-5x7');
 const InputEvent = require('input-event');
-// const Oled       = require('oled-js');
-// const raspiIo    = require('raspi-io');
+const Oled       = require('../sh1106-js'); // TODO npm module
 
-// Rotary Button
+const loop       = require('./lib/loop');
 
-const rotaryButtonInput = new InputEvent('/dev/input/event1');
-const rotaryButton      = new InputEvent.Keyboard(rotaryButtonInput);
+(async() => {
+  // Catch CTRL-C
+// TODO  process.stdin.setRawMode(true);
+// TODO  process.stdin.on('keypress', (chunk, key) => {
+// TODO    console.log(key);
+// TODO
+// TODO    if(key && key.name === "c" && key.ctrl) {
+// TODO      console.log("bye bye");
+// TODO      process.exit();
+// TODO    }
+// TODO  });
 
-rotaryButton.on('keyup',    data => console.log('keyup', data));
-rotaryButton.on('keydown',  data => console.log('keydown', data));
-rotaryButton.on('keypress', data => console.log('keypress', data));
+  // Oled
+  const oled = new Oled();
+  let   contrast = 0x00;
 
-// Rotary Encoder
-
-const rotaryEncoderInput = new InputEvent('/dev/input/event0');
-const rotaryEncoder      = new InputEvent.Rotary(rotaryEncoderInput);
-
-rotaryEncoder.on('left',  data => console.log('left', data));
-rotaryEncoder.on('right', data => console.log('right', data));
+  await oled.initialize();
+  await oled.dimDisplay(contrast);
 
 
-// OLED
 
-// const io    = new raspiIo();
-// const board = new five.Board({io, repl: false});
-//
-// board.on('ready', () => {
-//   console.log('ready');
-//
-//   const oled = new Oled(board, five, {
-//     width:   128,
-//     height:  64,
-//     address: 0x3c,
-//   });
-//
-//   oled.invertDisplay(true);
-// });
-//
-// // board.on('exit', () => {
-// //   process.exit(0);
-// // });
+  // Rotary Button
+  const rotaryButtonInput = new InputEvent('/dev/input/event1');
+  const rotaryButton      = new InputEvent.Keyboard(rotaryButtonInput);
+
+  rotaryButton.on('keypress', async(/* data */) => {
+    console.log('Button press');
+//    console.log('keypress', data);
+
+    await oled.turnOffDisplay();
+  });
+  rotaryButton.on('keyup', async(/* data */) => {
+    console.log('Button up');
+//    console.log('keyup', data);
+
+    await oled.turnOnDisplay();
+  });
+
+
+
+  // Rotary Encoder
+  const rotaryEncoderInput = new InputEvent('/dev/input/event0');
+  const rotaryEncoder      = new InputEvent.Rotary(rotaryEncoderInput);
+
+  rotaryEncoder.on('left', async(/* data */) => {
+    console.log('Button left');
+//    console.log('left', data);
+
+    await oled.dimDisplay(--contrast);
+    console.log(`contrast ${contrast}`);
+  });
+  rotaryEncoder.on('right', async(/* data */) => {
+    console.log('Button left');
+//    console.log('right', data);
+
+    await oled.dimDisplay(++contrast);
+    console.log(`contrast ${contrast}`);
+  });
+
+
+  await loop({oled});
+})();
