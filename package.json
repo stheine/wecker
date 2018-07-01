@@ -9,11 +9,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "check-types": "^7.4.0",
     "dank-do-while": "^0.1.2",
     "delay": "^3.0.0",
     "input-event": "^1.2.5",
     "johnny-five": "^0.15.0",
     "lame": "^1.2.4",
+    "lodash": "^4.17.10",
     "moment": "^2.22.2",
     "oled-font-5x7": "^1.0.1",
     "oled-js": "^4.0.5",
