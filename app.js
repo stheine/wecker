@@ -1,16 +1,15 @@
-#!/usr/bin/env node
-
 'use strict';
 
-/* eslint-disable no-console */
-/* eslint-disable camelcase */
-/* eslint-disable no-sync */
+/* eslint-disable no-new */
 
-const Oled  = require('../sh1106-js'); // TODO npm module
+const rpio   = require('rpio');
+const Oled   = require('../sh1106-js/oled.js'); // TODO npm module
 
-const input  = require('./lib/input');
-const loop   = require('./lib/loop');
-const render = require('./lib/render');
+const Input  = require('./lib/Input');
+const Loop   = require('./lib/Loop');
+const Menu   = require('./lib/Menu');
+const Render = require('./lib/Render');
+const Stream = require('./lib/Stream');
 
 (async() => {
   // Catch CTRL-C
@@ -24,22 +23,41 @@ const render = require('./lib/render');
 // TODO    }
 // TODO  });
 
+  // Rpio
+  rpio.init({
+    gpiomem: false,
+    mapping: 'physical',
+  });
+
   // Oled
-  const oled = new Oled();
+  const oled = new Oled({rpio});
 
   await oled.initialize();
   await oled.dimDisplay(0x00);
-//  await oled.clearDisplay(true);
+  await oled.clearDisplay(true);
+  await oled.update();
 
+  // Stream
+  const stream = new Stream({rpio});
+
+  // Menu
+  const menu   = new Menu({stream});
+
+  // Render
+  const render = new Render({menu, oled});
 
   // Register the handlers for the input events
-  await input.initialize({
-    press: render.press,
-    up:    render.up,
-    left:  render.left,
-    right: render.right,
-  });
+  new Input({handler: {
+    press: render.press.bind(render),
+    up:    render.up.bind(render),
+    left:  render.left.bind(render),
+    right: render.right.bind(render),
+  }});
+
+//  stream.toggle();
+
+  const loop = new Loop({render});
 
   // Startup main loop
-  await loop({oled});
+  await loop.start();
 })();
