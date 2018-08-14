@@ -1,3 +1,8 @@
 sudo apt-get install i2c-tools libi2c-dev
 node 8
 
+
+docker:
+If you want that the docker container has access to the sound card add --device /dev/snd:/dev/snd to your run command. See Runtime privilege and Linux capabilities
+https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities
+
