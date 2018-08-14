@@ -14,17 +14,6 @@ const Render = require('./lib/Render');
 const Stream = require('./lib/Stream');
 
 (async() => {
-  // Catch CTRL-C
-// TODO  process.stdin.setRawMode(true);
-// TODO  process.stdin.on('keypress', (chunk, key) => {
-// TODO    console.log(key);
-// TODO
-// TODO    if(key && key.name === "c" && key.ctrl) {
-// TODO      console.log("bye bye");
-// TODO      process.exit();
-// TODO    }
-// TODO  });
-
   // Rpio
   rpio.init({
     gpiomem: false,
