@@ -1,7 +1,6 @@
 'use strict';
 
 /* eslint-disable no-new */
-/* eslint-disable no-console */
 
 const rpio   = require('rpio');
 const Oled   = require('../sh1106-js/oled.js'); // TODO npm module
@@ -9,7 +8,6 @@ const Oled   = require('../sh1106-js/oled.js'); // TODO npm module
 const Input  = require('./lib/Input');
 const Logic  = require('./lib/Logic');
 const Loop   = require('./lib/Loop');
-const Menu   = require('./lib/Menu');
 const Render = require('./lib/Render');
 const Stream = require('./lib/Stream');
 
@@ -28,16 +26,14 @@ const Stream = require('./lib/Stream');
   await oled.clearDisplay(true);
   await oled.update();
 
+  // Render
+  const render = new Render({oled});
+
   // Stream
   const stream = new Stream({rpio});
 
-  // Menu
-  const menu   = new Menu({stream});
-
   // Logic
-  const logic = new Logic({menu, stream});
-
-  menu.logic = logic;
+  const logic = new Logic({render, stream});
 
   // Register the handlers for the input events
   new Input({handler: {
@@ -52,10 +48,7 @@ const Stream = require('./lib/Stream');
     right2: logic.right2.bind(logic),
   }});
 
-  // Render
-  const render = new Render({logic, menu, oled, stream});
-
-  const loop = new Loop({render});
+  const loop = new Loop({logic});
 
   // Startup main loop
   await loop.start();

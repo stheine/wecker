@@ -34,9 +34,11 @@
     "space-after-keywords": 0,
     "space-before-function-paren": [2, "never"],
 
+    "class-methods-use-this": 0,
     "comma-dangle": ["error", "only-multiline"],
     "lines-around-comment": 0,
     "line-comment-position": 0,
+    "max-statements-per-line": ["error", {"max": 2}],
     "no-inline-comments": 0,
     "no-multiple-empty-lines": 0,
     "no-multi-spaces": 0,

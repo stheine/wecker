@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node_modules/.bin/mocha --bail --ui tdd test",
+    "watch": "node_modules/.bin/mocha --bail --ui tdd --watch test"
   },
   "author": "",
   "license": "ISC",
@@ -28,8 +29,10 @@
     "speaker": "0.4.1"
   },
   "devDependencies": {
+    "assertthat": "^2.0.0",
     "eslint": "5.9.0",
     "eslint-config-es": "0.9.1",
-    "eslint-plugin-json": "1.3.2"
+    "eslint-plugin-json": "1.3.2",
+    "mocha": "^5.2.0"
   }
 }
