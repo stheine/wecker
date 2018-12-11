@@ -24,10 +24,12 @@
     "oled-js": "4.0.5",
     "pcm-volume": "1.0.0",
     "raspi-io": "9.0.0",
-    "request": "2.88.0",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.5",
     "request-stream": "1.2.2",
     "rpio": "1.0.11",
-    "speaker": "0.4.1"
+    "speaker": "0.4.1",
+    "xml-js": "^1.6.8"
   },
   "devDependencies": {
     "assertthat": "^2.0.0",
