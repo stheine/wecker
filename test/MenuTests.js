@@ -165,6 +165,20 @@ suite('Menu', () => {
         menu.next();
         assert.that(menu.getActiveEntry().label).is.equalTo('three - conditional');
       });
+
+      test(`on item that's switched to invisible`, async() => {
+        const menu = new Menu({entries});
+
+        showThree = true;
+
+        menu.next();
+        menu.next();
+        assert.that(menu.getActiveEntry().label).is.equalTo('three - conditional');
+
+        showThree = false;
+        menu.refresh();
+        assert.that(menu.getActiveEntry().label).is.equalTo('four');
+      });
     });
   });
 });
