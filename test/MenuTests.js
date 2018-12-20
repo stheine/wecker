@@ -5,7 +5,8 @@ const assert = require('assertthat');
 
 const Menu = require('../lib/Menu');
 
-let pressed = null;
+let pressed   = null;
+let showThree = true;
 
 const entries = [
   {
@@ -21,7 +22,8 @@ const entries = [
     },
   },
   {
-    label: 'three',
+    label:     'three - conditional',
+    condition: () => showThree,
   },
   {
     label: 'four',
@@ -133,6 +135,36 @@ suite('Menu', () => {
       menu.press();
 
       assert.that(pressed).is.equalTo('two');
+    });
+
+    suite('condition', () => {
+      test('getEntriesLength()', async() => {
+        const menu = new Menu({entries});
+
+        assert.that(menu.getEntriesLength()).is.equalTo(6);
+        showThree = false;
+        assert.that(menu.getEntriesLength()).is.equalTo(5);
+      });
+
+      test('change visibility', async() => {
+        const menu = new Menu({entries});
+
+        showThree = false;
+
+        menu.next();
+        assert.that(menu.getActiveEntry().label).is.equalTo('two');
+
+        menu.next();
+        assert.that(menu.getActiveEntry().label).is.equalTo('four');
+
+        showThree = true;
+
+        menu.previous();
+        assert.that(menu.getActiveEntry().label).is.equalTo('two');
+
+        menu.next();
+        assert.that(menu.getActiveEntry().label).is.equalTo('three - conditional');
+      });
     });
   });
 });
