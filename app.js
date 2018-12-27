@@ -5,6 +5,7 @@
 const rpio   = require('rpio');
 const Oled   = require('../sh1106-js/'); // TODO npm module
 
+const Alarm  = require('./lib/Alarm');
 const Input  = require('./lib/Input');
 const Logic  = require('./lib/Logic');
 const Loop   = require('./lib/Loop');
@@ -24,7 +25,6 @@ const Stream = require('./lib/Stream');
   await oled.initialize();
   await oled.dimDisplay(0x00);
   await oled.clearDisplay(true);
-  await oled.update();
 
   // Render
   const render = new Render({oled});
@@ -32,8 +32,11 @@ const Stream = require('./lib/Stream');
   // Stream
   const stream = new Stream({rpio});
 
+  // Alarm
+  const alarm = new Alarm({stream});
+
   // Logic
-  const logic = new Logic({render, stream});
+  const logic = new Logic({alarm, render, stream});
 
   // Register the handlers for the input events
   new Input({handler: {
