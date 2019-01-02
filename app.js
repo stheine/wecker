@@ -3,7 +3,7 @@
 /* eslint-disable no-new */
 
 const rpio   = require('rpio');
-const Oled   = require('../sh1106-js/'); // TODO npm module
+const Oled   = require('sh1106-js');
 
 const Alarm  = require('./lib/Alarm');
 const Data   = require('./lib/Data');
