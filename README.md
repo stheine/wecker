@@ -2,7 +2,6 @@
 
 ## TODO
 
-- auto helligkeit
 - weckzeiten flexibel einstellen koennen
 - letzte weckzeiten speichern
 - mehrere weckzeiten
