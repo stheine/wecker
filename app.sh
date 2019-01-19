@@ -1,1 +1,3 @@
-sudo `which node` ./app.js
+while [ true ]; do
+  sudo `which node` ./app.js
+done
