@@ -19,6 +19,7 @@
     "input-event": "1.2.5",
     "lame": "1.2.4",
     "lodash": "4.17.11",
+    "millisecond": "^0.1.2",
     "moment": "2.23.0",
     "node-cron": "2.0.3",
     "ogg": "1.2.5",
