@@ -8,4 +8,4 @@ rpio.init({
   mapping: 'physical',
 });
 
-rpio.write(35, rpio.HIGH); // unmute
+rpio.open(37, rpio.OUTPUT, rpio.HIGH); // enable
