@@ -1,7 +1,7 @@
 'use strict';
 
 const _      = require('lodash');
-const assert = require('assertthat');
+const assert = require('assertthat').default;
 
 const Menu = require('../lib/Menu');
 
