@@ -2,8 +2,6 @@
 
 'use strict';
 
-/* eslint-disable no-new */
-
 const rpio   = require('rpio');
 const Oled   = require('sh1106-js');
 
@@ -12,6 +10,7 @@ const Data   = require('./lib/Data');
 const Input  = require('./lib/Input');
 const Logic  = require('./lib/Logic');
 const Loop   = require('./lib/Loop');
+const Mqtt   = require('./lib/Mqtt');
 const Render = require('./lib/Render');
 const Stream = require('./lib/Stream');
 
@@ -44,8 +43,13 @@ const Stream = require('./lib/Stream');
   // Logic
   const logic = new Logic({alarm, data, render, stream});
 
+  // Mqtt
+  const mqtt = new Mqtt();
+
+  await mqtt.start();
+
   // Register the handlers for the input events
-  new Input({handler: {
+  const input = new Input({handler: {
     press1: logic.press1.bind(logic),
     up1:    logic.up1.bind(logic),
     left1:  logic.left1.bind(logic),
@@ -57,8 +61,10 @@ const Stream = require('./lib/Stream');
     right2: logic.right2.bind(logic),
   }});
 
-  const loop = new Loop({logic});
+  const loop = new Loop({alarm, input, logic, mqtt});
 
   // Startup main loop
   await loop.start();
+
+  process.exit(0);
 })();
