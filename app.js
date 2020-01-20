@@ -2,14 +2,13 @@
 
 'use strict';
 
-/* eslint-disable no-console */
-
 const rpio   = require('rpio');
 const Oled   = require('sh1106-js');
 
 const Alarm  = require('./lib/Alarm');
 const Data   = require('./lib/Data');
 const Input  = require('./lib/Input');
+const logger = require('./lib/logger');
 const Logic  = require('./lib/Logic');
 const Loop   = require('./lib/Loop');
 const Mqtt   = require('./lib/Mqtt');
@@ -17,7 +16,7 @@ const Render = require('./lib/Render');
 const Stream = require('./lib/Stream');
 
 (async() => {
-  console.log(`Startup --------------------------------------------------`);
+  logger.info(`Startup --------------------------------------------------`);
 
   // Rpio
   rpio.init({
@@ -70,7 +69,7 @@ const Stream = require('./lib/Stream');
   // Startup main loop
   await loop.start();
 
-  console.log(`Shutdown -------------------------------------------------`);
+  logger.info(`Shutdown -------------------------------------------------`);
 
   process.exit(0);
 })();
