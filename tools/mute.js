@@ -8,4 +8,4 @@ rpio.init({
   mapping: 'physical',
 });
 
-rpio.open(35, rpio.OUTPUT, rpio.LOW); // mute
+rpio.open(36, rpio.OUTPUT, rpio.LOW); // mute
