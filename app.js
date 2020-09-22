@@ -44,7 +44,7 @@ const Stream = require('./lib/Stream');
   const alarm = new Alarm({data, stream});
 
   // Logic
-  const logic = new Logic({alarm, data, render, stream});
+  const logic = new Logic({alarm, data, logger, render, stream});
 
   // Mqtt
   const mqtt = new Mqtt({logic});
