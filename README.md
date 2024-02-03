@@ -2,10 +2,6 @@
 
 ## Issues
 
-### Node support
-
-Only supports `node 10`, due to https://github.com/TooTallNate/node-lame/issues/92 .
-
 ### Soundcard not detected
 
 ```

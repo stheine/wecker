@@ -22,7 +22,7 @@
     "input-event": "1.2.6",
     "lodash": "4.17.21",
     "millisecond": "0.1.2",
-    "mpg123": "file:./mpg123",
+    "@stheine/mpg123": "0.2.4",
     "needle": "3.0.0",
     "node-cron": "3.0.0",
     "oled-font-5x7": "1.0.3",
@@ -32,10 +32,5 @@
     "sh1106-js": "0.0.1",
     "speaker": "0.5.3",
     "xml-js": "1.6.11"
-  },
-  "devDependencies": {
-    "eslint": "8.2.0",
-    "eslint-config-es": "3.31.0",
-    "eslint-plugin-json": "3.1.0"
   }
 }
