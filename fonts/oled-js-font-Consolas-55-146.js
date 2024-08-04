@@ -1,4 +1,4 @@
-module.exports = {
+export default {
 monospace: true,
 width: 30,
 height: 65,

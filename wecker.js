@@ -1,19 +1,19 @@
 #!/usr/bin/env node
 
-'use strict';
+import fsPromises from 'node:fs/promises';
 
-const rpio   = require('rpio');
-const Oled   = require('sh1106-js');
+import Oled       from 'sh1106-js';
+import rpio       from 'rpio';
 
-const Alarm  = require('./lib/Alarm');
-const Data   = require('./lib/Data');
-const Input  = require('./lib/Input');
-const logger = require('./lib/logger');
-const Logic  = require('./lib/Logic');
-const Loop   = require('./lib/Loop');
-const Mqtt   = require('./lib/Mqtt');
-const Render = require('./lib/Render');
-const Stream = require('./lib/Stream');
+import Alarm      from './lib/Alarm.js';
+import Data       from './lib/Data.js';
+import Input      from './lib/Input.js';
+import logger     from './lib/logger.js';
+import Logic      from './lib/Logic.js';
+import Loop       from './lib/Loop.js';
+import Mqtt       from './lib/Mqtt.js';
+import Render     from './lib/Render.js';
+import Stream     from './lib/Stream.js';
 
 (async() => {
   logger.info(`Startup --------------------------------------------------`);
